@@ -9,7 +9,10 @@ app.post('/todo',async (req,res)=>{
     const createPayload = req.body;
     const parsedPayload = createTodo.safeParse(createPayload);
     if(!parsedPayload.success){
-        res.status(400).send(parsedPayload.error.issues[0].message);
+
+        res.status(400).json({
+            msg : "wrong inputs"
+        });
         return ;
     }
     await todo.create({
